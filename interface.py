@@ -1,5 +1,7 @@
 import tkinter as tk
 import pyperclip
+import subprocess
+
 
 #Global vars
 toggle = 1                                      #toggle state 0 or 1
@@ -29,6 +31,9 @@ def submitF():                                  #updates the filePath and passwo
     filePath = filePathEntry.get()
     password = passwordEntry.get()
 
+    subprocess.Popen("explorer " + filePath)
+    print(filePath + " " + password)
+
 def setAsClip():                                #updates entry field(currently just filepath) with clipboard
     clip = ""
     print("hi")
@@ -57,7 +62,7 @@ def changePass(e):
 
 # Window and Widgets
 window = tk.Tk()
-window.geometry("1080x460")
+window.geometry("880x460")
 
 label_a = tk.Label(text="Enter Filepath to " + toggleOptions[toggle] +":")
 label_a.place(x=40,y=40)
