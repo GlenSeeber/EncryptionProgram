@@ -1,25 +1,25 @@
 from cryptography.fernet import Fernet
 
-def encrypt():
+def encrypt(myPath):
     #read a file
-    with open('stuff/filename.txt', 'rb') as f:
+    with open(myPath, 'rb') as f:
         inData = f.read()
 
     outData = fernet.encrypt(inData)
 
     #write to a file
-    with open('stuff/filename.txt', 'wb') as f:
+    with open(myPath, 'wb') as f:
         f.write(outData)
 
-def decrypt():
+def decrypt(myPath):
     #read a file
-    with open('stuff/filename.txt', 'rb') as f:
+    with open(myPath, 'rb') as f:
         inData = f.read()
 
     outData = fernet.decrypt(inData)
 
     #write to a file
-    with open('stuff/filename.txt', 'wb') as f:
+    with open(myPath, 'wb') as f:
         f.write(outData)
 
 
@@ -29,4 +29,4 @@ with open('filekey.key', 'rb') as f:
 
 fernet = Fernet(myKey)
 
-decrypt()
+decrypt("filename.txt")
