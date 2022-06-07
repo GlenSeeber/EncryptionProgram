@@ -1,0 +1,11 @@
+*.zip
+
+*.key
+
+filename.txt
+
+output
+
+input/
+
+__pycache__/
