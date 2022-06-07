@@ -35,6 +35,9 @@ def passwordToKey(password, salt = b''):
     return myKey, salt
 
 def encrypt(myPath, fileName, myPass):
+    # add a / to the end of the path if it's not already there
+    myPath = fixPath(myPath)
+
     # save key and salt from the password, don't save the password.
     myKey, salt = passwordToKey(myPass)     # [debug] remember to add password
 
@@ -53,9 +56,11 @@ def encrypt(myPath, fileName, myPass):
     outData = fernet.encrypt(inData)
 
     #create unique file, paste encrypted data onto it
-    writeNewFile(myPath, 'encrypted-output', content=outData)
+    writeNewFile(myPath, 'encrypted-output', extension='.nerd', content=outData)
 
 def decrypt(myPath, fileName, myPass):
+    # add a / to the end of the path if it's not already there
+    myPath = fixPath(myPath)
     # find salt
     with open(myPath+'salt.key', 'rb') as f:
         salt = f.read()
@@ -66,7 +71,11 @@ def decrypt(myPath, fileName, myPass):
     # use key for fernet
     fernet = Fernet(myKey)
 
-    #read a file
+    #if fileName is blank, use the default output name of the encrypt function
+    if fileName == '':
+        fileName = 'encrypted-output.nerd'
+    
+    # read input
     with open(myPath+fileName, 'rb') as f:
         inData = f.read()
 
@@ -94,4 +103,29 @@ def writeNewFile(myPath, fileName, extension='.zip', flags='b', content=''):
             #increase the n counter until we get a unique filename
             n += 1
             # example: filename(0).zip
+            suffix = '('+str(n)+')'
+
+
+
+myPath = input("Directory to your file (including final /):\n> ")
+fileName = input("The filename (including .zip) of your input file:\n> ")
+
+operation = input("Decrypt or Encrypt (d/e):\n> ")
+
+password = input('passcode:\n> ')
+
+def fixPath(input):
+    if input[-1] != '/':
+        input += '/'
+    return input
+
+if operation == 'e':
+    encrypt(myPath, fileName, password)
+
+elif operation == 'd':
+    decrypt(myPath, fileName, password)
+
+else:
+    print('error')
+=======
             suffix = '('+str(n)+')'

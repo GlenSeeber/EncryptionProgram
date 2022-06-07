@@ -1,5 +1,7 @@
 *.zip
 
+*.nerd
+
 *.key
 
 filename.txt
