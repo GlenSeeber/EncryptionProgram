@@ -6,6 +6,7 @@ import subprocess
 # Global vars
 toggle = 1  # toggle state 0 or 1
 toggleOptions = ["ENCRYPT", "DECRYPT"]  # list of toggle options
+# toggleFunctions = [Encrypt, Decrypt]   #list of functions
 
 filePath = ""  # holds the path of file to be modified
 password = ""  # holds the key to encrypt or decrypt with
@@ -14,6 +15,8 @@ fil = False    # bool for filepathentry focus
 pas = False    # bool for passwordentry focus
 
 # Functions
+
+
 def toggleFunc():                               # changes the state of toggle and updates widgets
     global toggle
 
@@ -25,21 +28,42 @@ def toggleFunc():                               # changes the state of toggle an
     label_a["text"] = "Enter Filepath to " + toggleOptions[toggle]
     label_b["text"] = "Enter Password to " + toggleOptions[toggle]
 
-def Fnull(): #placeholder function
+
+def Fnull():  # placeholder function
     return
 
-def submitF(Fpath = Fnull, Fcrypt = Fnull):  # updates the filePath and password variables.  Todo: call encryption/decryption function
+
+def sepFilePath(pth):
+    global index
+
+    index = 0
+    for i in range(0, len(pth)):
+        if pth[i] == "\\":
+            index = i
+    file = pth[index+1: -1]
+    path = pth[0: index + 1]
+    return (path, file)
+
+
+def replaceSlash(pth):
+    pth = pth.replace("\\", "/")
+    return pth
+
+
+# updates the filePath and password variables.  Todo: call encryption/decryption function
+def submitF(Fpath=sepFilePath, Fcrypt=Fnull):
     global filePath
     global password
 
     filePath = filePathEntry.get()
     password = passwordEntry.get()
-    #Fcrypt(filePath, password)       Run cryptography code
-    
-    path = filePath
-    #path = Fpath(filePath)           Run filepath function
+
+    path, file = Fpath(filePath)
+    print(path + " " + file)
+    # Fcrypt(replaceSlash(path) , file, password, toggleFunctions[toggle])      #Run cryptography code 
+    # REM: Might have to change to conditional with imported functions inside
+
     subprocess.Popen("explorer " + path)
-    print(filePath + " " + password)
 
 
 def setAsClip():  # updates entry field(currently just filepath) with clipboard
