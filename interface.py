@@ -52,11 +52,11 @@ clipPasteButton.place(x=140,y=120)
 label_b = tk.Label(text="Enter Password to " + toggleOptions[toggle] +":")
 label_b.place(x=40,y=80)
 
-passwordEntry = tk.Entry(width=90)
+passwordEntry = tk.Entry(width=40)
 passwordEntry.place(x= 200,y=80)
 
 submit = tk.Button(text="Submit", command=submitF, )
-submit.place(x=750,y=55)
+submit.place(x=450,y=75)
 
 toggleButton = tk.Button(text="Toggle Function", command=toggleFunc)
 toggleButton.place(x=40,y=120)
