@@ -50,8 +50,8 @@ def replaceSlash(pth):
     return pth
 
 
-# updates the filePath and password variables.  Todo: call encryption/decryption function
-def submitF(Fpath=sepFilePath, Fcrypt=Fnull):
+# updates the filePath and password variables. Submits password and file to crypto functions
+def submitF(Fpath=sepFilePath):
     global filePath
     global password
 
@@ -60,10 +60,9 @@ def submitF(Fpath=sepFilePath, Fcrypt=Fnull):
 
     path, file = Fpath(filePath)
     print(path + " " + file)
-    # Fcrypt(replaceSlash(path) , file, password, toggleFunctions[toggle])      #Run cryptography code 
-    # REM: Might have to change to conditional with imported functions inside
+
     if toggle == 0:
-        main.encrypt(path, file, password)
+        main.encrypt(replaceSlash(path), file, password)
     else:
         main.decrypt(path, file, password)
 
