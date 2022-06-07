@@ -3,7 +3,7 @@ import pyperclip
 
 #Global vars
 toggle = 1                                      #toggle state 0 or 1
-toggleOptions = ["Encrypt", "Decrypt"]          #list of toggle options
+toggleOptions = ["ENCRYPT", "DECRYPT"]          #list of toggle options
 
 filePath = ""                                   #holds the path of file to be modified
 password = ""                                   #holds the key to encrypt or decrypt with
@@ -19,7 +19,6 @@ def toggleFunc():                               # changes the state of toggle an
 
     label_a["text"] = "Enter Filepath to " + toggleOptions[toggle]
     label_b["text"] = "Enter Password to " + toggleOptions[toggle]
-    toggleButton["text"] = toggleOptions[toggle-1]
 
 def submitF():                                  #updates the filePath and password variables.  Todo: call encryption/decryption function
     global filePath
@@ -39,28 +38,28 @@ def setAsClip():                                #updates entry field(currently j
 
 # Window and Widgets
 window = tk.Tk()
-window.geometry("640x460")
+window.geometry("1080x460")
 
-label_a = tk.Label(text="Enter Filepath to " + toggleOptions[toggle], width=100)
-label_a.pack()
+label_a = tk.Label(text="Enter Filepath to " + toggleOptions[toggle] +":")
+label_a.place(x=40,y=40)
 
 filePathEntry = tk.Entry(width=90)
-filePathEntry.pack()
+filePathEntry.place(x= 200,y=40)
 
 clipPasteButton = tk.Button(text="paste", command=setAsClip)
-clipPasteButton.pack()
+clipPasteButton.place(x=140,y=120)
 
-label_b = tk.Label(text="Enter Password to " + toggleOptions[toggle], width=100)
-label_b.pack()
+label_b = tk.Label(text="Enter Password to " + toggleOptions[toggle] +":")
+label_b.place(x=40,y=80)
 
 passwordEntry = tk.Entry(width=90)
-passwordEntry.pack()
+passwordEntry.place(x= 200,y=80)
 
 submit = tk.Button(text="Submit", command=submitF, )
-submit.pack()
+submit.place(x=750,y=55)
 
-toggleButton = tk.Button(text=toggleOptions[toggle-1], command=toggleFunc)
-toggleButton.pack()
+toggleButton = tk.Button(text="Toggle Function", command=toggleFunc)
+toggleButton.place(x=40,y=120)
 
 window.mainloop()
 
