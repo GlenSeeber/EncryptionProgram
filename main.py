@@ -39,7 +39,7 @@ def encrypt(myPath, fileName, myPass):
     myKey, salt = passwordToKey(myPass)     # [debug] remember to add password
 
     # save salt
-    with open('salt.key', 'wb') as f:
+    with open(myPath+'/salt.key', 'wb') as f:
         f.write(salt)
 
     # use key for fernet
@@ -55,10 +55,9 @@ def encrypt(myPath, fileName, myPass):
     #create unique file, paste encrypted data onto it
     writeNewFile(myPath, 'encrypted-output', content=outData)
 
-
 def decrypt(myPath, fileName, myPass):
     # find salt
-    with open('salt.key', 'rb') as f:
+    with open(myPath+'/salt.key', 'rb') as f:
         salt = f.read()
 
     # find key using password and salt.
@@ -75,7 +74,6 @@ def decrypt(myPath, fileName, myPass):
 
     #write to a file
     writeNewFile(myPath, 'decrypted-output', content=outData)
-
 
 #creates a new file with a unique name, and writes content to it
 def writeNewFile(myPath, fileName, extension='.zip', flags='b', content=''):
