@@ -1,43 +1,66 @@
-from glob import glob
 import tkinter as tk
-from turtle import bgcolor
+import pyperclip
 
-from matplotlib.pyplot import text
+#Global vars
+toggle = 1                                      #toggle state 0 or 1
+toggleOptions = ["Encrypt", "Decrypt"]          #list of toggle options
 
-toggle = 1
-toggleOptions = ["Encrypt", "Decrypt"]
+filePath = ""                                   #holds the path of file to be modified
+password = ""                                   #holds the key to encrypt or decrypt with
 
-def toggleFunc():
+#Functions
+def toggleFunc():                               # changes the state of toggle and updates widgets
     global toggle
+
     if toggle == 0:
         toggle = 1
     else:
         toggle = 0
 
     label_a["text"] = "Enter Filepath to " + toggleOptions[toggle]
+    label_b["text"] = "Enter Password to " + toggleOptions[toggle]
     toggleButton["text"] = toggleOptions[toggle-1]
 
-def submitF():
-    print(filePath.get())
+def submitF():                                  #updates the filePath and password variables.  Todo: call encryption/decryption function
+    global filePath
+    global password
 
+    filePath = filePathEntry.get()
+    password = passwordEntry.get()
+
+def setAsClip():                                #updates entry field(currently just filepath) with clipboard
+    while len(filePathEntry.get()) > 0:         #removes entry field contents
+        filePathEntry.delete(0)
+
+    clip = ""
+    clip = pyperclip.paste()
+    filePathEntry.insert(0,clip)
+
+
+# Window and Widgets
 window = tk.Tk()
+window.geometry("640x460")
 
-frame_a = tk.Frame()
-frame_b = tk.Frame()
-
-label_a = tk.Label(master=frame_a, text="Enter Filepath to " + toggleOptions[toggle], width=70)
+label_a = tk.Label(text="Enter Filepath to " + toggleOptions[toggle], width=100)
 label_a.pack()
 
-filePath = tk.Entry(master=frame_a, width=30)
-filePath.pack()
+filePathEntry = tk.Entry(width=90)
+filePathEntry.pack()
 
-submit = tk.Button(master=frame_a, text="Submit", command=submitF)
+clipPasteButton = tk.Button(text="paste", command=setAsClip)
+clipPasteButton.pack()
+
+label_b = tk.Label(text="Enter Password to " + toggleOptions[toggle], width=100)
+label_b.pack()
+
+passwordEntry = tk.Entry(width=90)
+passwordEntry.pack()
+
+submit = tk.Button(text="Submit", command=submitF, )
 submit.pack()
 
-toggleButton = tk.Button(master=frame_a, text=toggleOptions[toggle-1], command=toggleFunc)
+toggleButton = tk.Button(text=toggleOptions[toggle-1], command=toggleFunc)
 toggleButton.pack()
-
-frame_a.pack()
 
 window.mainloop()
 
