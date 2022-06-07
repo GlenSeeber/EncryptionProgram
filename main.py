@@ -1,7 +1,6 @@
 from cryptography.fernet import Fernet
 
 
-
 def encrypt(myPath, fileName):
     #read a file
     with open(myPath+fileName, 'rb') as f:
@@ -45,9 +44,26 @@ def writeNewFile(myPath, fileName, extension='.zip', flags='b', content=''):
             # example: filename(0).zip
             suffix = '('+str(n)+')'
 
+
 # Get the Key
-with open('filekey.key', 'rb') as f:
-    myKey = f.read()
+try:
+    # [debug] you could add a unit test here, it would remove the 
+    # content from filekey.key/delete it, and then allow the except to run
+    
+    with open('filekey.key', 'rb') as f:
+        myKey = f.read()
+    
+    if (len(myKey) <= 0):
+        raise
+#if the filekey.key is empty/doesn't exist, generate a new key
+except:
+    exec(open("generate.py").read())    #run our generate.py script
+    print('no encryption key was found, a new one has been generated')  #debug message
+
+    #actually open the file now that we did that, assign the value to myKey
+    with open('filekey.key', 'rb') as f:
+        myKey = f.read()
+
 
 fernet = Fernet(myKey)
 

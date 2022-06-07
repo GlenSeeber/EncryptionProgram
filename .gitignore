@@ -7,3 +7,5 @@ filename.txt
 output
 
 input/
+
+__pycache__/
