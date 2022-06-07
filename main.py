@@ -56,7 +56,7 @@ def encrypt(myPath, fileName, myPass):
     outData = fernet.encrypt(inData)
 
     #create unique file, paste encrypted data onto it
-    writeNewFile(myPath, 'encrypted-output', content=outData)
+    writeNewFile(myPath, 'encrypted-output', extension='.nerd', content=outData)
 
 def decrypt(myPath, fileName, myPass):
     # add a / to the end of the path if it's not already there
@@ -73,7 +73,7 @@ def decrypt(myPath, fileName, myPass):
 
     #if fileName is blank, use the default output name of the encrypt function
     if fileName == '':
-        fileName = 'encrypted-output.zip'
+        fileName = 'encrypted-output.nerd'
     
     # read input
     with open(myPath+fileName, 'rb') as f:
