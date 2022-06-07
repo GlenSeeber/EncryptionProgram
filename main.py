@@ -127,5 +127,3 @@ elif operation == 'd':
 
 else:
     print('error')
-=======
-            suffix = '('+str(n)+')'
