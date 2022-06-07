@@ -10,11 +10,10 @@ toggleOptions = ["ENCRYPT", "DECRYPT"]  # list of toggle options
 filePath = ""  # holds the path of file to be modified
 password = ""  # holds the key to encrypt or decrypt with
 
-fil = False
-pas = False
+fil = False    # bool for filepathentry focus
+pas = False    # bool for passwordentry focus
 
 # Functions
-
 def toggleFunc():                               # changes the state of toggle and updates widgets
     global toggle
 
@@ -26,15 +25,20 @@ def toggleFunc():                               # changes the state of toggle an
     label_a["text"] = "Enter Filepath to " + toggleOptions[toggle]
     label_b["text"] = "Enter Password to " + toggleOptions[toggle]
 
+def Fnull(): #placeholder function
+    return
 
-def submitF():  # updates the filePath and password variables.  Todo: call encryption/decryption function
+def submitF(Fpath = Fnull, Fcrypt = Fnull):  # updates the filePath and password variables.  Todo: call encryption/decryption function
     global filePath
     global password
 
     filePath = filePathEntry.get()
     password = passwordEntry.get()
-
-    subprocess.Popen("explorer " + filePath)
+    #Fcrypt(filePath, password)       Run cryptography code
+    
+    path = filePath
+    #path = Fpath(filePath)           Run filepath function
+    subprocess.Popen("explorer " + path)
     print(filePath + " " + password)
 
 
