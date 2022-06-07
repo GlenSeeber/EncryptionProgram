@@ -1,7 +1,7 @@
 import tkinter as tk
 import pyperclip
 import subprocess
-
+import main
 
 # Global vars
 toggle = 1  # toggle state 0 or 1
@@ -62,6 +62,10 @@ def submitF(Fpath=sepFilePath, Fcrypt=Fnull):
     print(path + " " + file)
     # Fcrypt(replaceSlash(path) , file, password, toggleFunctions[toggle])      #Run cryptography code 
     # REM: Might have to change to conditional with imported functions inside
+    if toggle == 0:
+        main.encrypt(path, file, password)
+    else:
+        main.decrypt(path, file, password)
 
     subprocess.Popen("explorer " + path)
 
