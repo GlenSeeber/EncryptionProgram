@@ -66,17 +66,3 @@ except:
 
 
 fernet = Fernet(myKey)
-
-myPath = input("Directory to your file (including final /):\n> ")
-fileName = input("The filename (including .zip) of your input file:\n> ")
-
-operation = input("Decrypt or Encrypt (d/e):\n> ")
-
-if operation == 'd':
-    decrypt(myPath, fileName)
-
-elif operation == 'e':
-    encrypt(myPath, fileName)
-
-else:
-    print('error')
