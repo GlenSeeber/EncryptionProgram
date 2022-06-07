@@ -42,7 +42,7 @@ def encrypt(myPath, fileName, myPass):
     myKey, salt = passwordToKey(myPass)     # [debug] remember to add password
 
     # save salt
-    with open(myPath+'/salt.key', 'wb') as f:
+    with open(myPath+'salt.key', 'wb') as f:
         f.write(salt)
 
     # use key for fernet
@@ -62,7 +62,7 @@ def decrypt(myPath, fileName, myPass):
     # add a / to the end of the path if it's not already there
     myPath = fixPath(myPath)
     # find salt
-    with open(myPath+'/salt.key', 'rb') as f:
+    with open(myPath+'salt.key', 'rb') as f:
         salt = f.read()
 
     # find key using password and salt.
@@ -127,3 +127,5 @@ elif operation == 'd':
 
 else:
     print('error')
+=======
+            suffix = '('+str(n)+')'
